@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 from distutils.core import setup
 
-long_description = None
+long_description = """
+Backport of http://docs.python.org/3.4/library/statistics.htm
+"""
 
 setup(
     name='backports.statistics',
@@ -14,17 +16,18 @@ setup(
     maintainer_email='christian@python.org',
     url='https://bitbucket.org/tiran/backports.statistics',
     keywords='statistics',
-    #platforms='',
+    platforms='platform independent',
     license='PSFL',
     description='statistics backport 2.6 - 3.3',
     long_description=long_description,
     classifiers=[
         'Development Status :: 4 - Beta',
-        'Intended Audience :: Developers',
+        'Intended Audience :: Education',
+        'Intended Audience :: Financial and Insurance Industry',
+        'Intended Audience :: Science/Research',
         'License :: OSI Approved :: Python Software Foundation License',
         'Natural Language :: English',
-        'Operating System :: POSIX',
-        'Operating System :: Microsoft :: Windows',
+        'Operating System :: OS Independent',
         'Programming Language :: Python',
         'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.6',
@@ -35,6 +38,6 @@ setup(
         # 'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: Implementation :: CPython',
         'Programming Language :: Python :: Implementation :: PyPy',
+        'Topic :: Scientific/Engineering :: Mathematics',
     ],
 )
-
