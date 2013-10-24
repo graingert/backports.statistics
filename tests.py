@@ -405,7 +405,7 @@ class ApproxEqualInexactTest(unittest.TestCase):
     # === Absolute error tests ===
 
     def do_approx_equal_abs_test(self, x, delta):
-        template = "Test failure for x={!r}, y={!r}"
+        template = "Test failure for x={0!r}, y={1!r}"
         for y in (x + delta, x - delta):
             msg = template.format(x, y)
             self.assertTrue(approx_equal(x, y, tol=2*delta, rel=0), msg)
@@ -446,7 +446,7 @@ class ApproxEqualInexactTest(unittest.TestCase):
     # === Relative error tests ===
 
     def do_approx_equal_rel_test(self, x, delta):
-        template = "Test failure for x={!r}, y={!r}"
+        template = "Test failure for x={0!r}, y={1!r}"
         for y in (x*(1+delta), x*(1-delta)):
             msg = template.format(x, y)
             self.assertTrue(approx_equal(x, y, tol=0, rel=2*delta), msg)
