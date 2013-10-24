@@ -91,6 +91,7 @@ Exceptions
 A single exception is defined: StatisticsError is a subclass of ValueError.
 
 """
+from __future__ import division
 
 __all__ = [ 'StatisticsError',
             'pstdev', 'pvariance', 'stdev', 'variance',
@@ -107,6 +108,19 @@ import operator
 from fractions import Fraction
 from decimal import Decimal
 
+import sys
+
+if sys.version_info[0] == 2:
+    range = xrange
+
+if sys.version_info < (2, 7):
+    from backports.statistics._counter import Counter
+else:
+    from collections import Counter
+
+
+def isfinite(v):
+    return not math.isinf(v) and not math.isnan(v)
 
 # === Exceptions ===
 
@@ -161,7 +175,7 @@ def _sum(data, start=0):
         partials[d] = partials_get(d, 0) + n
     if None in partials:
         assert issubclass(T, (float, Decimal))
-        assert not math.isfinite(partials[None])
+        assert not isfinite(partials[None])
         return T(partials[None])
     total = Fraction()
     for d, n in sorted(partials.items()):
@@ -204,7 +218,7 @@ def _exact_ratio(x):
             if isinstance(x, Decimal):
                 assert not x.is_finite()
             else:
-                assert not math.isfinite(x)
+                assert not isfinite(x)
         return (x, None)
 
 
@@ -233,8 +247,8 @@ def _decimal_to_ratio(d):
 def _coerce_types(T1, T2):
     """Coerce types T1 and T2 to a common type.
 
-    >>> _coerce_types(int, float)
-    <class 'float'>
+    >>> _coerce_types(int, float) is float
+    True
 
     Coercion is performed according to this table, where "N/A" means
     that a TypeError exception is raised.
@@ -272,7 +286,7 @@ def _counts(data):
     # Generate a table of sorted (value, frequency) pairs.
     if data is None:
         raise TypeError('None is not iterable')
-    table = collections.Counter(data).most_common()
+    table = Counter(data).most_common()
     if not table:
         return table
     # Extract the values with the highest frequency.

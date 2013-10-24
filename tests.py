@@ -2,6 +2,7 @@
 approx_equal function.
 
 """
+from __future__ import division
 
 import collections
 import decimal
@@ -9,14 +10,18 @@ import doctest
 import math
 import random
 import types
-import unittest
 
 from decimal import Decimal
 from fractions import Fraction
 
+import sys
+if sys.version_info < (2, 7):
+    import unittest2 as unittest
+else:
+    import unittest
 
 # Module to be tested.
-import statistics
+from backports import statistics
 
 
 # === Helper functions and class ===
@@ -773,9 +778,9 @@ class UnivariateCommonMixin:
         # because it checks the numeric result by equality, but not by type.
         class MyFloat(float):
             def __truediv__(self, other):
-                return type(self)(super().__truediv__(other))
+                return type(self)(super(MyFloat, self).__truediv__(other))
             def __add__(self, other):
-                return type(self)(super().__add__(other))
+                return type(self)(super(MyFloat, self).__add__(other))
             __radd__ = __add__
 
         raw = self.prepare_data()
@@ -802,15 +807,15 @@ class UnivariateTypeMixin:
         # result, not the value.
         class MyFloat(float):
             def __truediv__(self, other):
-                return type(self)(super().__truediv__(other))
+                return type(self)(super(MyFloat, self).__truediv__(other))
             def __sub__(self, other):
-                return type(self)(super().__sub__(other))
+                return type(self)(super(MyFloat, self).__sub__(other))
             def __rsub__(self, other):
-                return type(self)(super().__rsub__(other))
+                return type(self)(super(MyFloat, self).__rsub__(other))
             def __pow__(self, other):
-                return type(self)(super().__pow__(other))
+                return type(self)(super(MyFloat, self).__pow__(other))
             def __add__(self, other):
-                return type(self)(super().__add__(other))
+                return type(self)(super(MyFloat, self).__add__(other))
             __radd__ = __add__
 
         data = self.prepare_data()
@@ -1088,7 +1093,7 @@ class TestMedian(NumericTestCase, AverageMixin):
 
     def prepare_data(self):
         """Overload method from UnivariateCommonMixin."""
-        data = super().prepare_data()
+        data = super(TestMedian, self).prepare_data()
         if len(data)%2 != 1:
             data.append(2)
         return data
