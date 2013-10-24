@@ -1,4 +1,4 @@
-#include README.txt CHANGES.txt LICENSE
+include README.txt CHANGES.txt LICENSE
 include MANIFEST.in
 include setup.py setup.cfg
 include tox.ini
