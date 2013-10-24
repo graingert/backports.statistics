@@ -303,8 +303,8 @@ def _counts(data):
 def mean(data):
     """Return the sample arithmetic mean of data.
 
-    >>> mean([1, 2, 3, 4, 4])
-    2.8
+    >>> mean([1, 2, 3, 4, 4]) == 2.8
+    True
 
     >>> from fractions import Fraction as F
     >>> mean([F(3, 7), F(1, 21), F(5, 3), F(1, 3)])
@@ -393,8 +393,8 @@ def median_high(data):
 def median_grouped(data, interval=1):
     """"Return the 50th percentile (median) of grouped continuous data.
 
-    >>> median_grouped([1, 2, 2, 3, 4, 4, 4, 4, 4, 5])
-    3.7
+    >>> median_grouped([1, 2, 2, 3, 4, 4, 4, 4, 4, 5]) == 3.7
+    True
     >>> median_grouped([52, 52, 53, 54])
     52.5
 
@@ -615,8 +615,8 @@ def pstdev(data, mu=None):
 
     See ``pvariance`` for arguments and other details.
 
-    >>> pstdev([1.5, 2.5, 2.5, 2.75, 3.25, 4.75])
-    0.986893273527251
+    >>> pstdev([1.5, 2.5, 2.5, 2.75, 3.25, 4.75]) == 0.986893273527251
+    True
 
     """
     var = pvariance(data, mu)
