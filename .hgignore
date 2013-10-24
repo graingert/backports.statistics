@@ -1,0 +1,11 @@
+^build/
+^dist/
+^\.tox/
+^MANIFEST
+__pycache__
+
+syntax: glob
+*.swp
+*.pyc
+*.pyo
+*~

@@ -1,0 +1,6 @@
+#include README.txt CHANGES.txt LICENSE
+include MANIFEST.in
+include setup.py setup.cfg
+include tox.ini
+include tests.py
+recursive-include backports *.py
