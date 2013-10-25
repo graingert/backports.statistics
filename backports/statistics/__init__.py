@@ -108,16 +108,21 @@ from decimal import Decimal
 import sys
 
 if sys.version_info[0] == 2:
+    # Python 2.6 / 2.7
     range = xrange
 
-if sys.version_info < (2, 7):
+    def isfinite(x):
+        return not math.isinf(x) and not math.isnan(x)
+else:
+    # Python 3.x
+    from math import isfinite
+
+if sys.version_info[:2] == (2, 6):
     from backports.statistics._counter import Counter
 else:
     from collections import Counter
 
 
-def isfinite(v):
-    return not math.isinf(v) and not math.isnan(v)
 
 # === Exceptions ===
 
