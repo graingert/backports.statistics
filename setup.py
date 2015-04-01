@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from distutils.core import setup
+from setuptools import setup
 
 long_description = """
 Backport of http://docs.python.org/3.4/library/statistics.htm
@@ -7,7 +7,7 @@ Backport of http://docs.python.org/3.4/library/statistics.htm
 
 setup(
     name='backports.statistics',
-    version='0.1',
+    version='0.1.0',
     packages=['backports.statistics'],
     namespace_packages=['backports'],
     author="Steven D'Aprano",
